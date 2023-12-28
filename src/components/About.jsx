@@ -1,6 +1,7 @@
 import { Box, Button, Typography, styled } from "@mui/material";
 import React from "react";
 import Testimonial from "./Testimonial";
+import ContactForm from "./ContactForm";
 
 const About = () => {
   const CustomBox = styled(Box)(({ theme }) => ({
@@ -83,6 +84,7 @@ const About = () => {
       <CustomButton variant="outlined" sx={{ mx: "auto", mt: 3, mb: 8 }}>
         Get in Touch
       </CustomButton>
+      <ContactForm />
     </Box>
   );
 };
