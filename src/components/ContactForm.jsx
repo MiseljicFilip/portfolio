@@ -48,25 +48,21 @@ const ContactForm = () => {
   }));
 
   const form = useRef();
-
+  const serviceId = process.env.REACT_APP_EMAIL_SERVICE_ID;
+  const templateId = process.env.REACT_APP_EMAIL_TEMPLATE_ID;
+  const publicKey = process.env.REACT_APP_EMAIL_PUBLIC_KEY;
   const sendEmail = (e) => {
     e.preventDefault();
 
-    emailjs
-      .sendForm(
-        "YOUR_SERVICE_ID",
-        "YOUR_TEMPLATE_ID",
-        form.current,
-        "YOUR_PUBLIC_KEY"
-      )
-      .then(
-        (result) => {
-          console.log(result.text);
-        },
-        (error) => {
-          console.log(error.text);
-        }
-      );
+    emailjs.sendForm(serviceId, templateId, form.current, publicKey).then(
+      (result) => {
+        console.log(result.text);
+        e.target.reset();
+      },
+      (error) => {
+        console.log(error.text);
+      }
+    );
   };
 
   const handleUserDataChange = (event) =>
@@ -101,7 +97,7 @@ const ContactForm = () => {
         <Typography variant="h4" align="center" mb={2} sx={{ color: "white" }}>
           Contact Me
         </Typography>
-        <form onSubmit={sendEmail}>
+        <form ref={form} onSubmit={sendEmail}>
           {/* <WithD
             fullWidth
             label="Name"
